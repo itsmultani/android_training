@@ -27,12 +27,12 @@ public class TodoActivity extends Activity {
         readItems();
         setContentView(R.layout.activity_todo);
         lvItems = (ListView) findViewById(R.id.lvItems);
-        items = new ArrayList<String>();
+        //items = new ArrayList<String>();
         itemAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, items);
         lvItems.setAdapter(itemAdapter);
-        items.add("First Item");
-        items.add("Second Item");
+        //items.add("First Item");
+        //items.add("Second Item");
         setupListViewListener();
     }
 
@@ -49,6 +49,7 @@ public class TodoActivity extends Activity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 items.remove(position);
                 itemAdapter.notifyDataSetChanged();
+                saveItems();
                 return true;
             }
 
