@@ -56,7 +56,7 @@ public class ImageViewerActivity extends Activity {
 						JSONObject photoJson = photosJson.getJSONObject(i);
 						InstagramPhoto photo = new InstagramPhoto();
 						photo.username = photoJson.getJSONObject("user").getString("username");
-						if (photoJson.has("caption")) {
+						if (photoJson.getJSONObject("caption") != null) {
 							photo.caption = photoJson.getJSONObject("caption").getString("text");
 						}
 						photo.imageUrl = photoJson.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
