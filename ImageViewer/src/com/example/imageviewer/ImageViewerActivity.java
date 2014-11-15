@@ -62,6 +62,8 @@ public class ImageViewerActivity extends Activity {
 						photo.imageUrl = photoJson.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
 						photo.imageHeight = photoJson.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
 						photo.likeCounts = photoJson.getJSONObject("likes").getInt("count");
+						// data[0].user.profile_picture
+						photo.proileImage = photoJson.getJSONObject("user").getString("profile_picture");
 						Log.i("DEBUG", photo.toString());
 						photos.add(photo);
 					}

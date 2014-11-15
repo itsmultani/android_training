@@ -30,12 +30,18 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
 		}
 		// lookup the subview within the template
 		TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption1);
+		TextView tvLikeCount = (TextView) convertView.findViewById(R.id.tvLikeCount);
+		TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
 		ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.imgPhoto);
+		ImageView userProfileImg = (ImageView) convertView.findViewById(R.id.userProfileImg);
 		// populate the subview
+		tvLikeCount.setText("Likes: " + photo.likeCounts);
 		tvCaption.setText(photo.caption);
+		tvUserName.setText("author: " + photo.username);
 		imgPhoto.getLayoutParams().height = photo.imageHeight;
 		imgPhoto.setImageResource(0);
 		Picasso.with(getContext()).load(photo.imageUrl).into(imgPhoto);
+		Picasso.with(getContext()).load(photo.proileImage).into(userProfileImg);
 		// return the view for that date item
 		return convertView;
 	}

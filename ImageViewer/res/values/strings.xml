@@ -6,5 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="actionBarTitle">Popular Photos</string>
     <string name="caption_defualt_text">This is a defualt Caption</string>
+    <string name="like_count">like_counts</string>
+    <string name="username">User name</string>
+    <string name="image_from_instagram">image_from_instagram</string>
 
 </resources>
