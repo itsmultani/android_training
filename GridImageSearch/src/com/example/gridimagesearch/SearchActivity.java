@@ -31,8 +31,10 @@ public class SearchActivity extends Activity {
 	private GridView gvResults;
 	private ArrayList<ImageResult> imageResults;
 	private ImageResultsAdapter aImageResults;
-	private int start = 0;
 	private String query = "";
+	private String imgSize = "none";
+	private String imgColor = "none";
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,11 @@ public class SearchActivity extends Activity {
 		imageResults = new ArrayList<ImageResult>();
 		aImageResults = new ImageResultsAdapter(this, imageResults);
 		gvResults.setAdapter(aImageResults);
+		Intent intent = getIntent();
+		if (intent != null) {
+			imgSize = intent.getStringExtra("size");
+			imgColor = intent.getStringExtra("color");
+		}
 	}
 
 	@Override
@@ -120,8 +127,16 @@ public class SearchActivity extends Activity {
 	}
 
 	private String generateUrl(String query, int start) {
+		String params = "";
+		if (imgColor != null && !imgColor.equals("none")) {
+			params += "&imgcolor=" + imgColor;
+		}
+		
+		if (imgColor != null && !imgSize.equals("none")) {
+			params += "&imgsz=" + imgSize;			
+		}
 		String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
-				+ query + "&rsz=8&start=" + start;
+				+ query + "&rsz=8&start=" + start + params;
 		return url;
 	}
 	@Override
@@ -131,6 +146,8 @@ public class SearchActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			Intent i = new Intent(this, SettingActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

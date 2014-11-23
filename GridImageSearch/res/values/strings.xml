@@ -8,5 +8,20 @@
     <string name="save_label">Search</string>
     <string name="image_title">image title</string>
     <string name="title_activity_image_display">ImageDisplayActivity</string>
+    <string name="title_activity_setting">Search Settings</string>
+    <string name="color">Color</string>
+    <string name="red">red</string>
+    <string name="black">black</string>
+    <string name="brown">brown</string>
+    <string name="size">size</string>
+    <string name="size_icon">icon</string>
+    <string name="img_color">Color</string>
+    <string name="img_size">Size</string>
+    <string name="size_small">small</string>
+    <string name="size_medium">medium</string>
+    <string name="size_large">large</string>
+    <string name="color_none">none</string>
+    <string name="size_none">none</string>
+    <string name="btSave">Save</string>
 
 </resources>
