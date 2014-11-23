@@ -21,6 +21,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.gridimagesearch.adapters.ImageResultsAdapter;
+import com.example.gridimagesearch.listeners.EndlessScrollListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -31,6 +32,7 @@ public class SearchActivity extends Activity {
 	private ArrayList<ImageResult> imageResults;
 	private ImageResultsAdapter aImageResults;
 	private int start = 0;
+	private String query = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +66,42 @@ public class SearchActivity extends Activity {
 			}
 			
 		});
+		gvResults.setOnScrollListener(new EndlessScrollListener() {
+
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// TODO Auto-generated method stub
+				customLoadMoreDataFromApi(page); 
+			}
+			
+			// Append more data into the adapter
+		    public void customLoadMoreDataFromApi(int offset) {
+		      // This method probably sends out a network request and appends new data items to your adapter. 
+		      // Use the offset value and add it as a parameter to your API request to retrieve paginated data.
+		      // Deserialize API response and then construct new objects to append to the adapter
+		    	String url = generateUrl(SearchActivity.this.query, offset * 8);
+		    	Log.i("INFO", "url=" + url);
+		    	System.out.println("url=" + url);
+		    	getImages(url);
+		    }
+			
+		});
 	}
 
 	public void onImageSearch(View v) {
 		String query = etQuery.getText().toString();
 		Toast.makeText(this, "Search for: " + query, Toast.LENGTH_LONG).show();
-		AsyncHttpClient client = new AsyncHttpClient();
+		
 		// https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=android&rsz=8
-		String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
-				+ query + "&rsz=8&start=" + start;
+		this.query = query;
+		String url = generateUrl(query, 0);
+		imageResults.clear();
+		getImages(url);
+
+	}
+	
+	private void getImages(String url) {
+		AsyncHttpClient client = new AsyncHttpClient();
 		client.get(url, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -80,7 +109,6 @@ public class SearchActivity extends Activity {
 				JSONArray imageResultsJson = null;
 				try {
 					imageResultsJson = response.getJSONObject("responseData").getJSONArray("results");
-					imageResults.clear();
 					aImageResults.addAll(ImageResult.fromJSONArray(imageResultsJson));
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -89,9 +117,13 @@ public class SearchActivity extends Activity {
 				
 			}
 		});
-
 	}
 
+	private String generateUrl(String query, int start) {
+		String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
+				+ query + "&rsz=8&start=" + start;
+		return url;
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
