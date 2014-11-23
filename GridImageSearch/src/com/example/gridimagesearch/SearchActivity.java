@@ -8,11 +8,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -27,6 +30,7 @@ public class SearchActivity extends Activity {
 	private GridView gvResults;
 	private ArrayList<ImageResult> imageResults;
 	private ImageResultsAdapter aImageResults;
+	private int start = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,18 @@ public class SearchActivity extends Activity {
 	private void setupViews() {
 		etQuery = (EditText) findViewById(R.id.etQuery);
 		gvResults = (GridView) findViewById(R.id.gvResults);
+		gvResults.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent i = new Intent(SearchActivity.this, ImageDisplayActivity.class);
+				ImageResult result = imageResults.get(position);
+				i.putExtra("url", result.fullUrl);
+				startActivity(i);
+			}
+			
+		});
 	}
 
 	public void onImageSearch(View v) {
@@ -56,7 +72,7 @@ public class SearchActivity extends Activity {
 		AsyncHttpClient client = new AsyncHttpClient();
 		// https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=android&rsz=8
 		String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
-				+ query + "&rsz=8";
+				+ query + "&rsz=8&start=" + start;
 		client.get(url, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
