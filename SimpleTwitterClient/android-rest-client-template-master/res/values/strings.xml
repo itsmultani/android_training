@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Basic Twitter</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_photos">Flickr Photos</string>
+    <string name="login_label">Connect to Twitter</string>
+    <string name="title_activity_timeline">TimelineActivity</string>
+    <string name="name_text">\@foo</string>
+    <string name="tvCreateTimeLabel">create time</string>
+    <string name="tvCreateTimeDes">"Timestamp: "</string>
+    <string name="tvTimeDiffDesc">"post@ "</string>
+    <string name="tvPostTimeDiffValue">timeDiff</string>
+    <string name="tvComposeLabel">What do you want to say?</string>
+    <string name="btSubmitTweet">Submit</string>
+    <string name="title_activity_aaa">AaaActivity</string>
+    <string name="title_activity_compose_tweet">ComposeTweetActivity</string>
+    <string name="etTweetBody">write something here</string>
+
+</resources>
