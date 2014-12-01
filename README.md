@@ -1,5 +1,8 @@
 Android Training Class
 
+class4 - Grid Image Search
+  ![SimpleTwitterClient](SimpleTwitterClient.gif)
+
 class3 - Grid Image Search
   ![grid image search](gridImageSearch.gif)
 
