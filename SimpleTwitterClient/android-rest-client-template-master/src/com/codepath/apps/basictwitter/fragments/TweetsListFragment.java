@@ -14,7 +14,7 @@ import com.codepath.apps.basictwitter.TweetArrayAdapter;
 import com.codepath.apps.basictwitter.listeners.EndlessScrollListener;
 import com.codepath.apps.basictwitter.models.Tweet;
 
-public class TweetsListFragment extends Fragment {
+public abstract class TweetsListFragment extends Fragment {
 	private ArrayList<Tweet> tweets;
 	private TweetArrayAdapter aTweets;
 	private ListView lvTweets;
@@ -38,7 +38,7 @@ public class TweetsListFragment extends Fragment {
 		lvTweets.setOnScrollListener(new EndlessScrollListener() {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
-				fragmentHomeTimeline.populateTimeline();
+				populateTimeline();
 			}
 		});
 		
@@ -53,5 +53,6 @@ public class TweetsListFragment extends Fragment {
 		aTweets.addAll(tweets);
 	}
 	
+	abstract public void populateTimeline();
 
 }
