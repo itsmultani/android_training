@@ -1,5 +1,7 @@
 package com.codepath.apps.basictwitter.listeners;
 
+import com.codepath.apps.basictwitter.R;
+
 import android.os.Bundle;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
@@ -51,6 +53,10 @@ public class FragmentTabListener<T extends Fragment> implements TabListener {
  
     public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
         FragmentTransaction sft = mActivity.getSupportFragmentManager().beginTransaction();
+        Fragment oldFragment = mActivity.getSupportFragmentManager().findFragmentById(R.id.flContainer);
+        if (oldFragment != null) {
+        	sft.detach(oldFragment);
+        }
         // Check if the fragment is already initialized
         if (mFragment == null) {
             // If not, instantiate and add it to the activity

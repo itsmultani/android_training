@@ -35,15 +35,19 @@ public class ProfileFragment extends Fragment {
 	private Profile profile;
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
 		tweets = new ArrayList<Tweet>();
 		aTweets = new TweetArrayAdapter(getActivity(), tweets);
 		client = TwitterApplication.getRestClient();
-		getProfile();
+		if (getArguments().getString("uid") != null && getArguments().getString("screenName") != null) {
+			getProfile(getArguments().getString("uid"), getArguments().getString("screenName"));
+		} else {
+			getProfile("13555812", "multani");
+		}
 	}
 	
-	private void getProfile() {
+	private void getProfile(String uid, String screenName) {
 		Log.d("DEBUG", "================= getProfile");
 		client.getProfile(new JsonHttpResponseHandler() {
 			@Override
@@ -59,7 +63,7 @@ public class ProfileFragment extends Fragment {
 				Log.d("debug", "================" + e.toString());
 				Log.d("debug", s.toString());
 			}
-		}, "13555812", "multani");
+		}, uid, screenName);
 	}
 
 	@Override

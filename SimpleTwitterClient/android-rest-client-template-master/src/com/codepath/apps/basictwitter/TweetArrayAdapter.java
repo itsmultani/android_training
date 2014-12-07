@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,19 +18,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.apps.basictwitter.fragments.ProfileFragment;
 import com.codepath.apps.basictwitter.models.Tweet;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
+	private Context context;
+	
 	public TweetArrayAdapter(Context context, List<Tweet> tweets) {
 		super(context, 0, tweets);
+		this.context = context;
 	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Tweet tweet = getItem(position);
+		final Tweet tweet = getItem(position);
 		View v;
 		if (convertView == null) {
 			LayoutInflater inflator = LayoutInflater.from(getContext());
@@ -39,7 +48,21 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		ivProfileImage.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View clickView) {
-				
+				if (context instanceof TimelineActivity) {
+					FragmentActivity timelineActivity = (TimelineActivity) context;
+					FragmentTransaction sft = timelineActivity.getSupportFragmentManager().beginTransaction();
+					Fragment oldFragment = timelineActivity.getSupportFragmentManager().findFragmentById(R.id.flContainer);
+					sft.detach(oldFragment);
+					Bundle bundle = new Bundle();
+					bundle.putString("uid", tweet.getUid());
+					bundle.putString("screenName", tweet.getUser().getScreenName());
+			        Fragment mFragment = Fragment.instantiate(timelineActivity, ProfileFragment.class.getName(), bundle);
+			        mFragment.setArguments(bundle);
+			        Log.d("DEBUG", "======================= tweet: " + tweet.getUid());
+			        sft.attach(mFragment);
+			        sft.add(R.id.flContainer, mFragment, "others_profile");
+			        sft.commit();
+				}
 			}
 		});
 		
