@@ -31,7 +31,7 @@ public class MentionsTimelneFragment extends TweetsListFragment {
 		client.getMentionsTimeLine(new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONArray json) {
-				Log.d("DEBUG", "json: " + json.toString());
+				//Log.d("DEBUG", "json: " + json.toString());
 				ArrayList<Tweet> resps = Tweet.fromJsonArray(json);
 				Tweet tweet = resps.get(resps.size() - 1);
 				if (tweet != null) {

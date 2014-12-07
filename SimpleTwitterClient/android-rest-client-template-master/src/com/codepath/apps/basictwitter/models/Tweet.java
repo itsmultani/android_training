@@ -25,6 +25,19 @@ public class Tweet {
 		}
 		return tweet;
 	}
+	
+	public static Tweet fromJsonWithoutUser(JSONObject json) {
+		Tweet tweet = new Tweet();
+		try {
+			tweet.body = json.getString("text");
+			tweet.uid = json.getString("id");
+			tweet.createdAt = json.getString("created_at");
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return tweet;
+	}
 
 	public String getBody() {
 		return body;

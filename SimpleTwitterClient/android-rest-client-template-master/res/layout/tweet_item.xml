@@ -20,7 +20,7 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvUserName1"
@@ -28,19 +28,19 @@
         android:text="@string/tvCreateTimeDes" />
 
     <TextView
+        android:id="@+id/tvBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timestamp"
+        android:layout_toRightOf="@+id/ivProfileImage"
+        android:text="This is the tweet body" />
+
+    <TextView
         android:id="@+id/tvCreateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUserName1"
-        android:layout_toRightOf="@+id/textView1"
+        android:layout_toRightOf="@+id/timestamp"
         android:text="@string/tvCreateTimeLabel" />
-
-    <TextView
-        android:id="@+id/tvBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_toRightOf="@+id/ivProfileImage"
-        android:text="This is the tweet body" />
 
 </RelativeLayout>

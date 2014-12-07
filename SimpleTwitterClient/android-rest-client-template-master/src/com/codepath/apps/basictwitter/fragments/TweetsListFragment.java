@@ -18,15 +18,12 @@ public abstract class TweetsListFragment extends Fragment {
 	private ArrayList<Tweet> tweets;
 	private TweetArrayAdapter aTweets;
 	private ListView lvTweets;
-	private HomeTimelineFragment fragmentHomeTimeline;
-
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		tweets = new ArrayList<Tweet>();
 		aTweets = new TweetArrayAdapter(getActivity(), tweets);
-		fragmentHomeTimeline = new HomeTimelineFragment();
 	}
 	
 	@Override

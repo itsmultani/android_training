@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.codepath.apps.basictwitter.fragments.HomeTimelineFragment;
 import com.codepath.apps.basictwitter.fragments.MentionsTimelneFragment;
+import com.codepath.apps.basictwitter.fragments.ProfileFragment;
 import com.codepath.apps.basictwitter.listeners.FragmentTabListener;
 
 public class TimelineActivity extends FragmentActivity {
@@ -41,7 +42,15 @@ public class TimelineActivity extends FragmentActivity {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(true);
+		Tab tab0 = actionBar
+				.newTab()
+				.setText("Profile")
+				.setIcon(R.drawable.ic_profile)
+				.setTabListener(
+				    new FragmentTabListener<ProfileFragment>(R.id.flContainer, this, "profile",
+									ProfileFragment.class));
 
+			actionBar.addTab(tab0);
 		Tab tab1 = actionBar
 			.newTab()
 			.setText("Home")
@@ -62,5 +71,7 @@ public class TimelineActivity extends FragmentActivity {
 								MentionsTimelneFragment.class));
 
 		actionBar.addTab(tab2);
+		
+
 	}
 }
