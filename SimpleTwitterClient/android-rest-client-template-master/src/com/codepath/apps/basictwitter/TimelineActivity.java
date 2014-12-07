@@ -1,71 +1,27 @@
 package com.codepath.apps.basictwitter;
 
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.codepath.apps.basictwitter.models.Tweet;
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.codepath.apps.basictwitter.fragments.HomeTimelineFragment;
+import com.codepath.apps.basictwitter.fragments.MentionsTimelneFragment;
+import com.codepath.apps.basictwitter.listeners.FragmentTabListener;
 
-public class TimelineActivity extends Activity {
-	private TwitterClient client;
-	private ArrayList<Tweet> tweets;
-	private ArrayAdapter<Tweet> aTweets;
-	private ListView lvTweets;
-	private String maxId = null;
+public class TimelineActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timeline);
-		client = TwitterApplication.getRestClient();
-		lvTweets = (ListView) findViewById(R.id.lvTweets);
-		tweets = new ArrayList<Tweet>();
-		aTweets = new TweetArrayAdapter(this, tweets);
-		lvTweets.setAdapter(aTweets);
-		maxId = null;
 		Log.d("DEBUG", "timeline activity on Create");
-		populateTimeline();
-		lvTweets.setOnScrollListener(new EndlessScrollListener() {
-			@Override
-			public void onLoadMore(int page, int totalItemsCount) {
-				populateTimeline();
-			}
-		});
-	}
-
-	@SuppressLint("NewApi")
-	public void populateTimeline() {
-		client.getHomeTimeLine(new JsonHttpResponseHandler() {
-
-			@Override
-			public void onSuccess(JSONArray json) {
-				Log.d("DEBUG", "json: " + json.toString());
-				ArrayList<Tweet> resps = Tweet.fromJsonArray(json);
-				Tweet tweet = resps.get(resps.size() - 1);
-				if (tweet != null) {
-					maxId = tweet.getUid();
-				}
-				aTweets.addAll(resps);
-			}
-
-			@Override
-			public void onFailure(Throwable e, String s) {
-				Log.d("debug", e.toString());
-				Log.d("debug", s.toString());
-			}
-		}, maxId);
+		setupTabs();
 	}
 
 	@Override
@@ -79,5 +35,32 @@ public class TimelineActivity extends Activity {
 		Intent intent = new Intent();
 		intent.setClass(this, ComposeTweetActivity.class);
 		startActivity(intent);
+	}
+	
+	private void setupTabs() {
+		ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setDisplayShowTitleEnabled(true);
+
+		Tab tab1 = actionBar
+			.newTab()
+			.setText("Home")
+			.setIcon(R.drawable.ic_home)
+			.setTabListener(
+				new FragmentTabListener<HomeTimelineFragment>(R.id.flContainer, this, "home",
+								HomeTimelineFragment.class));
+
+		actionBar.addTab(tab1);
+		actionBar.selectTab(tab1);
+
+		Tab tab2 = actionBar
+			.newTab()
+			.setText("Mentions")
+			.setIcon(R.drawable.ic_mentions)
+			.setTabListener(
+			    new FragmentTabListener<MentionsTimelneFragment>(R.id.flContainer, this, "mentions",
+								MentionsTimelneFragment.class));
+
+		actionBar.addTab(tab2);
 	}
 }
