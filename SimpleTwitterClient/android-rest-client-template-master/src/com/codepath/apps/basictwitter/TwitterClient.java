@@ -79,7 +79,7 @@ public class TwitterClient extends OAuthBaseClient {
 		if (maxId != null) {
 			params.put("max_id", maxId);
 		}
-		client.get(apiUrl, null, handler);
+		client.get(apiUrl, params, handler);
 	}
 	
 	public void getProfile(AsyncHttpResponseHandler handler, String userId, String screenName) {
@@ -87,6 +87,15 @@ public class TwitterClient extends OAuthBaseClient {
 		RequestParams params = new RequestParams();
 		params.put("user_id", userId);
 		params.put("screen_name", screenName);
+		client.get(apiUrl, params, handler);
+	}
+	
+	public void getUserTimeLine(AsyncHttpResponseHandler handler, String uid) {
+		String apiUrl = getApiUrl("statuses/user_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("since_id", "1");
+		params.put("user_id", uid);
+		Log.d("DEBUG", "get user timeline url: " + apiUrl + " uid: " + uid);
 		client.get(apiUrl, params, handler);
 	}
 	

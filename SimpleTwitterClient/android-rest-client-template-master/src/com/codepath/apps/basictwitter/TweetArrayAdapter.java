@@ -49,7 +49,8 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 			@Override
 			public void onClick(View clickView) {
 				if (context instanceof TimelineActivity) {
-					FragmentActivity timelineActivity = (TimelineActivity) context;
+					TimelineActivity timelineActivity = (TimelineActivity) context;
+					timelineActivity.getActionBar().selectTab(null);
 					FragmentTransaction sft = timelineActivity.getSupportFragmentManager().beginTransaction();
 					Fragment oldFragment = timelineActivity.getSupportFragmentManager().findFragmentById(R.id.flContainer);
 					sft.detach(oldFragment);
