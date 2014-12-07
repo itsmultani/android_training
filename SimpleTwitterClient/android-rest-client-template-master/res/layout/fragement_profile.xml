@@ -4,36 +4,43 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/profileImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ivProfileFragmentImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_launcher" />
-
-    <TextView
-        android:id="@+id/timestamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/profileImage"
-        android:layout_toRightOf="@+id/profileImage"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/numberOfFollowing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/timestamp"
-        android:layout_alignBottom="@+id/timestamp"
-        android:layout_toRightOf="@+id/timestamp"
-        android:text="TextView" />
 
     <ListView
         android:id="@+id/lvProfileTweets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/profileImage" >
+        android:layout_below="@+id/tvRecentTweetLabel" >
     </ListView>
+
+    <TextView
+        android:id="@+id/tvNumberOfFollower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvNumberOfFollowing"
+        android:layout_toRightOf="@+id/ivProfileFragmentImage"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvNumberOfFollowing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivProfileFragmentImage"
+        android:layout_alignLeft="@+id/tvNumberOfFollower"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvRecentTweetLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ivProfileFragmentImage"
+        android:text="@string/tvlRecentTweet" />
 
 </RelativeLayout>

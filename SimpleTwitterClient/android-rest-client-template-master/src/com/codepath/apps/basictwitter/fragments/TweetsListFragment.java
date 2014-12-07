@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.codepath.apps.basictwitter.R;
 import com.codepath.apps.basictwitter.TweetArrayAdapter;
+import com.codepath.apps.basictwitter.TwitterClient;
 import com.codepath.apps.basictwitter.listeners.EndlessScrollListener;
 import com.codepath.apps.basictwitter.models.Tweet;
 
@@ -18,6 +19,7 @@ public abstract class TweetsListFragment extends Fragment {
 	private ArrayList<Tweet> tweets;
 	private TweetArrayAdapter aTweets;
 	private ListView lvTweets;
+	private TwitterClient client;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -7,6 +7,7 @@ import java.util.List;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -34,6 +35,14 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		}
 		
 		ImageView ivProfileImage = (ImageView) v.findViewById(R.id.ivProfileImage);
+		
+		ivProfileImage.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View clickView) {
+				
+			}
+		});
+		
 		TextView tvUserName = (TextView) v.findViewById(R.id.tvUserName1);
 		TextView tvBody = (TextView) v.findViewById(R.id.tvBody);
 		TextView tvCreateTime = (TextView) v.findViewById(R.id.tvCreateTime);

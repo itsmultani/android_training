@@ -51,6 +51,7 @@ public class TimelineActivity extends FragmentActivity {
 									ProfileFragment.class));
 
 			actionBar.addTab(tab0);
+			
 		Tab tab1 = actionBar
 			.newTab()
 			.setText("Home")
@@ -60,7 +61,6 @@ public class TimelineActivity extends FragmentActivity {
 								HomeTimelineFragment.class));
 
 		actionBar.addTab(tab1);
-		actionBar.selectTab(tab1);
 
 		Tab tab2 = actionBar
 			.newTab()
@@ -73,5 +73,6 @@ public class TimelineActivity extends FragmentActivity {
 		actionBar.addTab(tab2);
 		
 
+		actionBar.selectTab(tab0);
 	}
 }

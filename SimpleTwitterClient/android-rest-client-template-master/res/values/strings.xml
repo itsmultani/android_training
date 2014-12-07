@@ -17,5 +17,6 @@
     <string name="title_activity_aaa">AaaActivity</string>
     <string name="title_activity_compose_tweet">ComposeTweetActivity</string>
     <string name="etTweetBody">write something here</string>
+    <string name="tvlRecentTweet">Recent Tweet:</string>
 
 </resources>

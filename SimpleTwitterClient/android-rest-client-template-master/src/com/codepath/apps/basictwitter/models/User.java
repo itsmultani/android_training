@@ -9,6 +9,17 @@ public class User {
 	private String screenName;
 	private String profileImageUrl;
 	
+	public User(String name, long uid, String screenName, String profileImageUrl) {
+		this.name = name;
+		this.uid = uid;
+		this.screenName = screenName;
+		this.profileImageUrl = profileImageUrl;
+	}
+	
+	public User() {
+		
+	}
+	
 	public static User fomrJson(JSONObject json) {
 		User u  = new User();
 		try {
